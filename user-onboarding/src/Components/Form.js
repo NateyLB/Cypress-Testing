@@ -4,10 +4,10 @@ import axios from "axios";
 
 const formSchema = yup.object().shape({
     name: yup.string().required("Name is a required field"),
-    email: yup.string().email().required("Must include email"),
-    role: yup.string().required("Must Select a role"),
-    password: yup.string().required("Must enter a pasword"),
-    terms: yup.boolean().oneOf([true], "please agree to Terms of Use")
+    email: yup.string().email("Please enter a valid email").required("Email is a required field"),
+    role: yup.string().required("Must select a role"),
+    password: yup.string().required("Must enter a password"),
+    terms: yup.bool().oneOf([true], "Please agree to Terms of Use")
 });
 
 function Form(props) {
@@ -54,7 +54,7 @@ function Form(props) {
                 console.log("in errors",err);
                 setErrors({
                     ...errors,
-                    [event.target.name]: err.errors
+                    [event.target.name]: err.errors[0]
                 });
             })
     };
@@ -97,12 +97,12 @@ function Form(props) {
                 <label htmlFor="name">
                     Name
                 <input data-cy="name" id="name" type="text" name="name" value={formState.name} onChange={inputChange} />
-                {errors.name.length > 0 ? (<p className="error">{errors.name}</p>):null}
+                {errors.name.length > 0 ? (<p data-cy="nameError">{errors.name}</p>):null}
                 </label>
                 <label htmlFor="email">
                     Email
                 <input data-cy="email" id="email" type="email" name="email" value={formState.email} onChange={inputChange} />
-                {errors.email.length > 0 ? (<p className="error"> {errors.email}</p>) : null}
+                {errors.email.length > 0 ? (<p data-cy="emailError">{errors.email}</p>) : null}
                 </label>
                 <label htmlFor="role">
                     Role
@@ -114,11 +114,12 @@ function Form(props) {
                         <option value="Mobile Engineer">Mobile Engineer</option>
                         <option value="Data Scientist">Data Scientist</option>
                     </select>
+                    {errors.role.length > 0 ? (<p data-cy="roleError">{errors.role}</p>):null}
                 </label>
                 <label htmlFor="password">
                     Password
                 <input data-cy="password" id="password" type="password" name="password" value={formState.password} onChange={inputChange} />
-                {errors.password.length > 0 ? (<p>{errors.password}</p>):null}
+                {errors.password.length > 0 ? (<p data-cy="passwordError">{errors.password}</p>):null}
                 </label>
                 <label htmlFor="terms">
                     <input data-cy="terms" id="terms" type="checkbox" name="terms" checked={formState.terms} onChange={inputChange} />
@@ -128,9 +129,9 @@ function Form(props) {
             </form>
             <div>
                 <h1>Users</h1>
-                {users.map(element => {
+                {users.map((element, index) => {
                     return (
-                        <div>Name: {element.name} Email: {element.email} Role: {element.role}</div>
+                        <div data-cy={index}>Name: {element.name} Email: {element.email} Role: {element.role}</div>
                     );
                 })}
             </div>
