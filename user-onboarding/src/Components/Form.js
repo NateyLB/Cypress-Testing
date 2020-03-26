@@ -96,17 +96,17 @@ function Form(props) {
             <form onSubmit={formSubmit}>
                 <label htmlFor="name">
                     Name
-                <input id="name" type="text" name="name" value={formState.name} onChange={inputChange} />
+                <input data-cy="name" id="name" type="text" name="name" value={formState.name} onChange={inputChange} />
                 {errors.name.length > 0 ? (<p className="error">{errors.name}</p>):null}
                 </label>
                 <label htmlFor="email">
                     Email
-                <input id="email" type="email" name="email" value={formState.email} onChange={inputChange} />
+                <input data-cy="email" id="email" type="email" name="email" value={formState.email} onChange={inputChange} />
                 {errors.email.length > 0 ? (<p className="error"> {errors.email}</p>) : null}
                 </label>
                 <label htmlFor="role">
                     Role
-                    <select name="role" onChange={inputChange}>
+                    <select data-cy="role" name="role" onChange={inputChange}>
                         <option></option>
                         <option value="Front-End Engineer">Front-End Engineer</option>
                         <option value="Back-End Engineer">Back-End Engineer</option>
@@ -117,14 +117,14 @@ function Form(props) {
                 </label>
                 <label htmlFor="password">
                     Password
-                <input id="password" type="password" name="password" value={formState.password} onChange={inputChange} />
+                <input data-cy="password" id="password" type="password" name="password" value={formState.password} onChange={inputChange} />
                 {errors.password.length > 0 ? (<p>{errors.password}</p>):null}
                 </label>
                 <label htmlFor="terms">
-                    <input id="terms" type="checkbox" name="terms" checked={formState.terms} onChange={inputChange} />
+                    <input data-cy="terms" id="terms" type="checkbox" name="terms" checked={formState.terms} onChange={inputChange} />
                     Terms and Conditions
             </label>
-                <button disabled={buttonDisabled}>Submit</button>
+                <button data-cy="submit" disabled={buttonDisabled}>Submit</button>
             </form>
             <div>
                 <h1>Users</h1>
