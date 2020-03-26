@@ -2,7 +2,7 @@ describe("Test out inputs and submit out form", function (){
     this.beforeEach(function(){
         cy.visit("http://localhost:3000/");
     });
-it("Add text to input and submit form", function(){
+it("Checks validation and error messages", function(){
     //checking form validation and error messages
     //checming name validation
     cy.get("[data-cy=name]")
@@ -29,6 +29,8 @@ it("Add text to input and submit form", function(){
     .type("n{backspace}");
     cy.get("[data-cy=passwordError]")
     .should("have.text", "Must enter a password");
+});
+it ("adds text to input and submits form", function(){
     //input into forms and submit
     cy.get("[data-cy=name]")
     .type("Nathan")
